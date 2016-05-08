@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>password Manager!</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="http://localhost:9090/livereload.js"></script>
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+   <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Manage passwords</a>
+
+        </div>
+        <ul class="nav navbar-nav pull-right">
+            <li>{{#link-to 'newPassword'}}<span class="glyphicon glyphicon-plus"></span> Ciper Password{{/link-to}}</li>
+        </ul>
+
+      </div>
+    </nav>
+    <div id="main" class="container">
+      {{outlet}}
+    </div>
+  </script>
+
+
+<script type="text/x-handlebars" id="newPassword">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="website" class="col-sm-2 control-label">website</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="website" name="website" placeholder="The name of your password" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">password</label>
+        <div class="col-sm-10">
+          <input class="form-control" id="password" name="password" placeholder="you password to save" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="key" class="col-sm-2 control-label">Key</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="key" name="key" placeholder="The key to ciper your password" required>
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-success" {{action 'save'}}>Ciper & Save</button>
+        </div>
+      </div>
+  </form>
+  </script>
+ <script type="text/x-handlebars" id="index">
+    <div class="row">
+      <div class="col-md-4">
+        <table class='table'>
+          <thead>
+            <tr><th>Your passwords</th></tr>
+          </thead>
+          {{#each controller}}
+            <tr><td>
+            {{#link-to 'password' this}}
+              {{website}}
+            {{/link-to}}
+            </td></tr>
+
+          {{/each}}
+        </table>
+      </div>
+      <div class="col-md-8">
+        {{outlet}}
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" id="password">
+    <h2>In {{website}} <small class="muted">{{format-date submittedOn}}</small></h2>
+    <hr>
+    Ciper text:<p class="lead" id='ciperPassword'>
+    {{Cpassword}}
+    </p>
+    key:<input type="text" id="keyToDeciper">
+
+    <button  class="btn btn-success" {{action 'deciper'}}>Get your plaintext</button>
+    <p class="lead">plaintext</p><p id="plaintext"></p>
+
+  </script>
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/handlebars-1.0.0.js"></script>
+  <script src="js/libs/ember-1.1.2.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/localstorage_adapter.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/AES.js"></script>
+
+</body>
+</html>
