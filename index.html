@@ -84,10 +84,11 @@
   <script type="text/x-handlebars" id="password">
     <h2>In {{website}} <small class="muted">{{format-date submittedOn}}</small></h2>
     <hr>
-    Ciper text:<p class="lead" id='ciperPassword'>
+    <p class="lead" >Ciper text:</p>
+    <p id='ciperPassword'>
     {{Cpassword}}
     </p>
-    key:<input type="text" id="keyToDeciper">
+    <p class="lead">key:</p><input type="text" id="keyToDeciper">
 
     <button  class="btn btn-success" {{action 'deciper'}}>Get your plaintext</button>
     <p class="lead">plaintext</p><p id="plaintext"></p>
